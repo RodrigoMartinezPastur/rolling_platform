@@ -4,6 +4,17 @@ let contenedorLista = document.getElementById("menu_lista");
 let mentores = JSON.parse(localStorage.getItem("mentor")) || [];
 let card = document.getElementById("card");
 
+class Consulta {
+  constructor(id, nombre, email, textArea) {
+    this.id = id;
+    this.nombre = nombre;
+    this.email = email;
+    this.textArea = textArea;
+  }
+}
+
+let consulta = JSON.parse(localStorage.getItem("consulta")) || [];
+
 if (usuario) {
   if (usuario.rol === "admin") {
     let li = document.createElement("li");
@@ -45,5 +56,19 @@ function cargarCarta() {
     card.appendChild(div);
   }
 }
+
+function cargarConsultas(e) {
+  e.preventDefault();
+
+  let id = new Date().getTime();
+  let nick = document.getElementById("nombre").value;
+  let email = document.getElementById("email").value;
+  let text = document.getElementById("textArea").value;
+  consulta.push(new Consulta(id, nick, email, text));
+  localStorage.setItem("consulta", JSON.stringify(consulta));
+  document.getElementById("form").reset();
+  document.getElementById("nombre").focus();
+}
+document.getElementById("form").addEventListener("submit", cargarConsultas);
 
 cargarCarta();
