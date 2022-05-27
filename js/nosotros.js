@@ -34,7 +34,7 @@ function cargarCarta() {
       div.classList = "card mb-3";
       let tarjeta = ` <div class="row g-0">
             <div class="col-md-4">
-              <img src="${persona.imagen}" class="img-fluid rounded-start" alt="...">
+              <img src="${persona.imagen}" class="img-fluid rounded-start h-100" alt="...">
             </div>
             <div class="col-md-8">
               <div class="card-body">

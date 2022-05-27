@@ -29,23 +29,30 @@ function crearTarjeta(e) {
 function cargarCarta() {
   card.innerHTML = "";
 
-  mentores.map(function (persona) {
+  mentores.map(function (persona, index) {
     let div = document.createElement("div");
-    div.classList = "card mb-3";
-    let tarjeta = ` <div class="row g-0">
-            <div class="col-md-4">
+    div.classList = "card mb-3 ";
+    let tarjeta = ` <div class="row ">
+            <div class="col-md-4 ">
               <img src="${persona.imagen}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">${persona.mentor}</h5>
                 <p class="card-text">${persona.resumen}</p>
+                <button class="btn btn-danger mb-2 float-end" onclick="borrarMentores(${index})">Eliminar</button>
              </div>
            </div>
          </div>`;
     div.innerHTML = tarjeta;
     card.appendChild(div);
   });
+}
+
+function borrarMentores(index) {
+  mentores.splice(index, 1);
+  localStorage.setItem("mentor", JSON.stringify(mentores));
+  cargarCarta();
 }
 
 document.getElementById("formulario").addEventListener("submit", crearTarjeta);
